@@ -2,3 +2,4 @@ react-app/
 django-server/
 
 *.DS_Store
+.idea
