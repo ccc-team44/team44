@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  couch_db_master:
+    image: "couchdb:3.0.0"
+    restart: always
+    ports:
+      - 5984:5984
+    links:
+    {% for i in range(1,5) %}
+      - couch_replica_{{ i }}{% endfor %}
+    environment:
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+    volumes:
+      - /data:/opt/couchdb/data
+
+  {% for i in range(1,5) %}
+  couch_db_replica_{{ i }}:
+    image: couchdb:3.0.0s
+    restart: always
+    ports:
+      - {{ i + 5984 }}:5984
+    environment:
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+    volumes:
+      - {{ couch_db_dir }}:/opt/couchdb/data
+  {% endfor %}
+
