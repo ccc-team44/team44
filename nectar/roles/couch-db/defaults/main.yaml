@@ -1,2 +1,3 @@
 ---
-couch_db_dir: /data/couch_db
+couch_db_dir: couch_db
+couch_db_data_dir: /data/couch_db

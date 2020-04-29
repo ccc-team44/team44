@@ -10,3 +10,9 @@
     - role: openstack-security-group
     - role: openstack-instance
     - role: openstack-volume-snapshot
+
+- hosts: COMP90024[0]
+  gather_facts: true
+  become: yes
+  roles:
+    - couch-db

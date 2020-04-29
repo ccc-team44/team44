@@ -3,7 +3,7 @@
   tags: 'couch-db'
   become: yes
   file:
-    path: "{{ db_dir }}"
+    path: "{{ couch_db_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     recurse: yes
@@ -14,7 +14,7 @@
   become: yes
   template:
     src: docker-compose.yaml.j2
-    dest: "{{ db_dir }}/docker-compose.yaml"
+    dest: "{{ couch_db_dir }}/docker-compose.yaml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
@@ -22,7 +22,7 @@
   tags: 'couch-db'
   become: yes
   docker_compose:
-    project_src: "{{ db_dir }}"
+    project_src: "{{ couch_db_dir }}"
     pull: yes
     state: present
     remove_orphans: yes

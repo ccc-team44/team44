@@ -5,18 +5,20 @@ services:
     image: "couchdb:3.0.0"
     restart: always
     ports:
-      - 5984:5984
+      - '5984:5984'
+      - '4369:4369'
+      - '9100:9100'
     links:
     {% for i in range(1,5) %}
-      - couch_replica_{{ i }}{% endfor %}
+      - couch_node_{{ i }}{% endfor %}
     environment:
       COUCHDB_USER: {{ database_user }}
       COUCHDB_PASSWORD: {{ database_password }}
     volumes:
-      - /data:/opt/couchdb/data
+      - {{ couch_db_data_dir }}:/opt/couchdb/data
 
   {% for i in range(1,5) %}
-  couch_db_replica_{{ i }}:
+  couch_db_node_{{ i }}:
     image: "couchdb:3.0.0"
     restart: always
     ports:
@@ -25,6 +27,7 @@ services:
       COUCHDB_USER: {{ database_user }}
       COUCHDB_PASSWORD: {{ database_password }}
     volumes:
-      - {{ couch_db_dir }}:/opt/couchdb/data
+      - {{ couch_db_data_dir }}:/opt/couchdb/data
+    container_name: couch_db_node_{{ i }}
   {% endfor %}
 
