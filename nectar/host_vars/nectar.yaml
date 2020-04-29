@@ -3,9 +3,9 @@ availability_zone: melbourne-qh2-uom
 
 # Volume
 volumes:
-  - vol_name: demo-03-vol-1
+  - vol_name: db-vol-1
     vol_size: 10
-  - vol_name: demo-03-vol-2
+  - vol_name: db-vol-2
     vol_size: 10
 
 # Security group
@@ -22,13 +22,19 @@ security_groups:
     port_range_min: 80
     port_range_max: 80
     remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb
+    description: "DB security group for Couch DB"
+    protocol: tcp
+    port_range_min: 5984
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
 
 # Instance
 instances:
-  - name: demo-03
-    volumes: ['demo-03-vol-1', 'demo-03-vol-2']
+  - name: db
+    volumes: ['db-vol-1', 'db-vol-2']
 
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
 instance_key_name: id_xin
-instance_flavor: uom.mse.2c9g
+instance_flavor: uom.mse.1c4g
 

@@ -5,15 +5,13 @@
 
   roles:
     - role: openstack-common
-    - role: openstack-images
     - role: openstack-volume
     - role: openstack-security-group
     - role: openstack-instance
-    - role: openstack-volume-snapshot
 
 - hosts: COMP90024
   vars_files:
-    - host_vars/wordpress.yaml
+    - host_vars/couch-db.yaml
   gather_facts: true
 
   roles:
