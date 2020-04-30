@@ -20,7 +20,7 @@
     state: directory
 
 - name: Create a couchDB container
-  command: docker run -d --name couchdb --network host -p 5984:5984 -v {{ couch_db_data_dir }}:/opt/couchdb/data -e "COUCHDB_USER={{database_user}}" -e "COUCHDB_PASSWORD={{database_password}}" ibmcom/couchdb3:3.0.0
+  command: docker run -d --name couchdb --network host -p 5984:5984 -v {{ couch_db_data_dir }}:/opt/couchdb/data -e "COUCHDB_USER={{database_user}}" -e "COUCHDB_PASSWORD={{database_password}}" couchdb:2.3.0
 
 
 - name: modifies vm.args
