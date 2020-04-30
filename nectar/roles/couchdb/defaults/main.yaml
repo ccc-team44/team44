@@ -1,3 +1,5 @@
 ---
 couch_db_dir: couch_db
 couch_db_data_dir: /data/couch_db
+database_user: admin
+database_password: 1111

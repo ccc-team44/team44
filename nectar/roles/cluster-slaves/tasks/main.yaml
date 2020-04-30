@@ -1,3 +1,8 @@
+- name: Leave swarm for a node
+  shell: sudo docker swarm leave -f
+  ignore_errors: yes
+
+
 # - debug:
 #     msg: "{{hostvars[groups['COMP90024'][0]]}}"
 
@@ -5,7 +10,7 @@
   set_fact:
     worker_token: "{{ hostvars[groups['COMP90024'][0]]['worker_token']['stdout'] }}"
 
-- name: "set worker token fact"
+- name: "set manager fact"
   set_fact:
     manager: "{{ groups['COMP90024'][0] }}"
 
