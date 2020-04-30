@@ -1,0 +1,17 @@
+- name: Leave swarm for a node
+  shell: sudo docker swarm leave -f
+  
+- name: "create primary swarm manager"
+  shell: sudo docker swarm init --advertise-addr {{ ansible_eth0['ipv4']['address'] }}
+
+- name: "get docker swarm manager token"
+  shell: sudo docker swarm join-token -q manager
+  register: manager_token
+
+- name: "get docker swarm worker token"
+  shell: sudo docker swarm join-token -q worker
+  register: worker_token
+
+- name: set facts
+  set_fact:
+    worker_token: "{{worker_token}}"

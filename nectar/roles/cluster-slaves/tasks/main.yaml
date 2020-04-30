@@ -1,0 +1,7 @@
+- name: "Join"
+  shell: "sudo docker swarm join --token {{hostvars[hostvars['localhost']['manager']]['worker_token']['stdout']}} {{hostvars['localhost']['manager']}}:2377"
+  retries: 5
+  delay: 30
+
+- debug:
+    msg: "{{hostvars[hostvars['localhost']['manager']]['worker_token']['stdout']}}"
