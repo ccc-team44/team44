@@ -7,13 +7,15 @@ services:
     ports:
       - '5984:5984'
       - '4369:4369'
-      - '9100:9100'
+      - '9100-9200:9100-9200'
     links:
     {% for i in range(1,5) %}
-      - couch_node_{{ i }}{% endfor %}
+      - couch_node_{{ i }}
+    {% endfor %}
     environment:
-      COUCHDB_USER: {{ database_user }}
-      COUCHDB_PASSWORD: {{ database_password }}
+      - COUCHDB_USER: {{ database_user }}
+      - COUCHDB_PASSWORD: {{ database_password }}
+      - NODENAME: COMP90024[0]
     volumes:
       - {{ couch_db_data_dir }}:/opt/couchdb/data
 
@@ -24,8 +26,9 @@ services:
     ports:
       - {{ i + 5984 }}:5984
     environment:
-      COUCHDB_USER: {{ database_user }}
-      COUCHDB_PASSWORD: {{ database_password }}
+      - COUCHDB_USER: {{ database_user }}
+      - COUCHDB_PASSWORD: {{ database_password }}
+      - NODENAME: COMP90024[{{ i }}]
     volumes:
       - {{ couch_db_data_dir }}:/opt/couchdb/data
     container_name: couch_db_node_{{ i }}
