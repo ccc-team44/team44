@@ -14,9 +14,9 @@ services:
     volumes:
       - ./data/master/data:/opt/couchdb/data
     environment:
-      - COUCHDB_USER: {{ database_user }}
-      - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ groups['COMP90024'][0] }}
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+      NODENAME: {{ groups['COMP90024'][0] }}
     container_name: couch_master
     networks:
       couchdb_nw:
@@ -30,9 +30,9 @@ services:
     volumes:
       - ./data/slave1/data:/opt/couchdb/data
     environment:
-      - COUCHDB_USER: {{ database_user }}
-      - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ groups['COMP90024'][1] }}
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+      NODENAME: {{ groups['COMP90024'][1] }}
     container_name: couch_slave1
     networks:
       couchdb_nw:
@@ -46,9 +46,9 @@ services:
     volumes:
       - ./data/slave2/data:/opt/couchdb/data
     environment:
-      - COUCHDB_USER: {{ database_user }}
-      - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ groups['COMP90024'][2] }}
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
+      NODENAME: {{ groups['COMP90024'][2] }}
     container_name: couch_slave2
     networks:
       couchdb_nw:

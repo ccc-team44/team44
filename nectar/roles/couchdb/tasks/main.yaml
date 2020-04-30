@@ -9,6 +9,9 @@
     recurse: yes
     state: directory
 
+- debug:
+    msg: "ips in CMP90024 {{ groups['COMP90024'] }}"
+
 - name: Configure compose
   tags: 'couchdb'
   become: yes
@@ -17,7 +20,6 @@
     dest: "{{ couch_db_dir }}/docker-compose.yml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-
 
 - name: Deploy CouchDB
   shell: sudo docker stack deploy -c {{ couch_db_dir }}/docker-compose.yml couchdb
