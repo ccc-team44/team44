@@ -33,22 +33,6 @@
     - role: docker
     - role: couchdb-volumes
 
-
-- hosts: COMP90024[0]
-  vars_files:
-    - host_vars/couchdb.yaml
-  gather_facts: true
-  become: yes
-  roles:
-    - role: cluster-master
-
-- hosts: COMP90024[1]:COMP90024[2]
-  gather_facts: no
-  become: yes
-  roles:
-    - role: cluster-slaves
-
-
 - hosts: COMP90024
   gather_facts: no
   become: yes
