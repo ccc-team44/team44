@@ -12,7 +12,7 @@ services:
       - couch_slave1
       - couch_slave2
     volumes:
-      - ./data/master/data:/opt/couchdb/data
+      - {{ couch_db_data_dir }}/data:/opt/couchdb/data
     environment:
       COUCHDB_USER: {{ database_user }}
       COUCHDB_PASSWORD: {{ database_password }}
@@ -25,7 +25,7 @@ services:
     ports:
       - "15984:5984"
     volumes:
-      - ./data/slave1/data:/opt/couchdb/data
+      - {{ couch_db_data_dir }}:/opt/couchdb/data
     environment:
       COUCHDB_USER: {{ database_user }}
       COUCHDB_PASSWORD: {{ database_password }}
@@ -38,7 +38,7 @@ services:
     ports:
       - "25984:5984"
     volumes:
-      - ./data/slave2/data:/opt/couchdb/data
+      - {{ couch_db_data_dir }}:/opt/couchdb/data
     environment:
       COUCHDB_USER: {{ database_user }}
       COUCHDB_PASSWORD: {{ database_password }}

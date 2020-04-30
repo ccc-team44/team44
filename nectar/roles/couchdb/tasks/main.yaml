@@ -1,5 +1,5 @@
 ---
-- name: Create CouchDB Service
+- name: Create CouchDB dir
   tags: 'couchdb'
   become: yes
   file:
@@ -8,6 +8,17 @@
     group: "{{ ansible_user }}"
     recurse: yes
     state: directory
+
+- name: Create CouchDB data dir
+  tags: 'couchdb'
+  become: yes
+  file:
+    path: "{{ couch_db_data_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
 
 - debug:
     msg: "ips in CMP90024 {{ groups['COMP90024'] }}"
