@@ -16,11 +16,11 @@ services:
     environment:
       - COUCHDB_USER: {{ database_user }}
       - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ COMP90024[0] }}
+      - NODENAME={{ groups['COMP90024'][0] }}
     container_name: couch_master
     networks:
       couchdb_nw:
-        ipv4_address: {{ COMP90024[0] }}
+        ipv4_address: {{ groups['COMP90024'][0] }}
 
   couch_slave1:
     image: "ibmcom/couchdb3:3.0.0"
@@ -32,11 +32,11 @@ services:
     environment:
       - COUCHDB_USER: {{ database_user }}
       - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ COMP90024[1] }}
+      - NODENAME={{ groups['COMP90024'][1] }}
     container_name: couch_slave1
     networks:
       couchdb_nw:
-        ipv4_address: {{ COMP90024[1] }}
+        ipv4_address: {{ groups['COMP90024'][1] }}
 
   couch_slave2:
     image: "ibmcom/couchdb3:3.0.0"
@@ -48,15 +48,15 @@ services:
     environment:
       - COUCHDB_USER: {{ database_user }}
       - COUCHDB_PASSWORD: {{ database_password }}
-      - NODENAME={{ COMP90024[2] }}
+      - NODENAME={{ groups['COMP90024'][2] }}
     container_name: couch_slave2
     networks:
       couchdb_nw:
-        ipv4_address: {{ COMP90024[2] }}
+        ipv4_address: {{ groups['COMP90024'][2] }}
 
 networks:
   couchdb_nw:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 0.0.0.0/0

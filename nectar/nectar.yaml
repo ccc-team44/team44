@@ -9,6 +9,7 @@
     - role: openstack-security-group
     - role: openstack-instance
 
+
 - hosts: COMP90024
   become: yes
   gather_facts: false
