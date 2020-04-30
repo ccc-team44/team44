@@ -22,6 +22,12 @@ security_groups:
     port_range_min: 80
     port_range_max: 80
     remote_ip_prefix: 0.0.0.0/0
+  - name: https
+    description: "Demo security group for HTTP"
+    protocol: tcp
+    port_range_min: 443
+    port_range_max: 443
+    remote_ip_prefix: 0.0.0.0/0
   - name: couchdb
     description: "DB security group for Couch DB"
     protocol: tcp
