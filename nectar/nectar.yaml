@@ -49,10 +49,14 @@
     - role: cluster-slaves
 
 
-- hosts: COMP90024[0]
+- hosts: COMP90024
   gather_facts: no
   become: yes
   roles:
     - role: couchdb
-    - role: wp
 
+- hosts: COMP90024[0]
+  gather_facts: no
+  become: yes
+  roles:
+    - role: couchdb-cluster
