@@ -59,4 +59,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 0.0.0.0/0
+        - subnet: {{ ".".join(groups['COMP90024'][0].split(".")[:2]) + ".0.0/16" }}
