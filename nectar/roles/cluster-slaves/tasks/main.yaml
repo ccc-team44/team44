@@ -1,7 +1,16 @@
-- name: "Join"
-  shell: "sudo docker swarm join --token {{hostvars[hostvars['localhost']['manager']]['worker_token']['stdout']}} {{hostvars['localhost']['manager']}}:2377"
-  retries: 5
-  delay: 30
+# - debug:
+#     msg: "{{hostvars[groups['COMP90024'][0]]}}"
 
-- debug:
-    msg: "{{hostvars[hostvars['localhost']['manager']]['worker_token']['stdout']}}"
+- name: "set worker token fact"
+  set_fact:
+    worker_token: "{{ hostvars[groups['COMP90024'][0]]['worker_token']['stdout'] }}"
+
+- name: "set worker token fact"
+  set_fact:
+    manager: "{{ groups['COMP90024'][0] }}"
+
+- name: "join as a worker"
+  shell: "sudo docker swarm join --token {{worker_token}} {{manager}}:2377"
+  retries: 3
+  delay: 20
+
