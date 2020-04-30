@@ -1,5 +1,4 @@
 ---
-
 - name: add node to master (step1-begin)
   command: "curl -X POST -H \"Content-Type: application/json\" http://{{database_user}}:{{database_password}}@{{ansible_default_ipv4.address}}:5984/_cluster_setup -d '{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\", \"username\": \"{{database_user}}\", \"password\": \"{{database_password}}\", \"port\": 5984, \"node_count\": \"2\", \"remote_node\": \"{{item}}\", \"remote_current_user\": \"{{database_user}}\", \"remote_current_password\": \"{{database_password}}\" }'"
   with_items: "{{groups['COMP90024'][1::]}}"

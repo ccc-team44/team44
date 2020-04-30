@@ -43,4 +43,5 @@
   gather_facts: no
   become: yes
   roles:
-    - role: couchdb-cluster
+    - role: setup-cluster
+
