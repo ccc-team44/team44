@@ -1,0 +1,35 @@
+---
+- name: Create django directory
+  tags: 'django'
+  become: yes
+  file:
+    path: "{{ django_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+
+- name: Log into docker
+  docker_login:
+    username: ccc44a2
+    password: bigcouch123
+
+- name: Configure compose
+  tags: 'django'
+  become: yes
+  template:
+    src: docker-compose.yaml.j2
+    dest: "{{ django }}/docker-compose.yaml"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Run docker compose
+  tags: 'django'
+  become: yes
+  docker_compose:
+    project_src: "{{ django_dir }}"
+    pull: yes
+    state: present
+    remove_orphans: yes
+    recreate: always

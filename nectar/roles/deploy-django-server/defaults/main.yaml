@@ -1,0 +1,4 @@
+---
+django_dir: django_server
+database_user: admin
+database_password: 1111

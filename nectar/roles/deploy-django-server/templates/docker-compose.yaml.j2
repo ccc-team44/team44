@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  wordpress:
+    image: ccc44a2/ccc-44-django-server:latest
+    restart: always
+    ports:
+      - 8001:80
+    environment:
+      COUCH_DB_USER: {{ database_user }}
+      COUCH_DB_PASSWORD: {{ database_password }}
+      COUCH_DB_ADDRESS: {{ groups['COMP90024'][0] }}
