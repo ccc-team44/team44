@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+
+  # redis:
+  #   image: redis:alpine
+  #   ports:
+  #     - "6379:6379"
+  #   sysctls:
+  #     - net.core.somaxconn=2048
+
+  react-app:
+    build:
+      context: ./react-app
+      dockerfile: dev.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./react-app:/app/react-app
+    working_dir: /app/react-app
+    command: sh -c "npm install && npm start"
+    # depends_on:
+    #   - django-server
+
+  django-server:
+    build:
+      context: ./django-server
+      dockerfile: dev.Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./django-server:/app/django-server
+      - pip-cache:/root/.cache/pip
+    working_dir: /app/django-server
+    command: sh -c "python manage.py runserver 8001"
+    # environment:
+    #   - REDIS_HOST=redis
+    # depends_on:
+    #   - redis
+
+volumes:
+  pip-cache:
