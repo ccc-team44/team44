@@ -20,7 +20,7 @@
   become: yes
   template:
     src: docker-compose.yaml.j2
-    dest: "{{ django }}/docker-compose.yaml"
+    dest: "{{ django_dir }}/docker-compose.yaml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
