@@ -1,0 +1,29 @@
+---
+- name: Create react directory
+  tags: 'react'
+  become: yes
+  file:
+    path: "{{ react_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+- name: Configure compose
+  tags: 'react'
+  become: yes
+  template:
+    src: docker-compose.yaml.j2
+    dest: "{{ react_dir }}/docker-compose.yaml"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Run docker compose
+  tags: 'react'
+  become: yes
+  docker_compose:
+    project_src: "{{ react_dir }}"
+    pull: yes
+    state: present
+    remove_orphans: yes
+    recreate: always
