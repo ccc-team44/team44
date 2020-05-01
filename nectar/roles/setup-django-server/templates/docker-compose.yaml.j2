@@ -1,11 +1,11 @@
 version: '3.7'
 
 services:
-  wordpress:
+  django_server:
     image: ccc44a2/ccc-44-django-server:latest
     restart: always
     ports:
-      - 8001:80
+      - 8001:8001
     environment:
       COUCH_DB_USER: {{ database_user }}
       COUCH_DB_PASSWORD: {{ database_password }}
