@@ -45,4 +45,5 @@
   roles:
     - role: setup-cluster
     - role: setup-django-server
+    - role: setup-react-app
 
