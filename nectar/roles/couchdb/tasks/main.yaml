@@ -19,6 +19,18 @@
     recurse: yes
     state: directory
 
+- name: chmod
+  command: sudo chmod 777 /var/run/docker.sock
+  ignore_errors: yes
+
+- name: all stop
+  shell: sudo docker ps -qa | xargs docker stop
+  ignore_errors: yes
+
+- name: all rm
+  shell: sudo docker ps -qa | xargs docker rm
+  ignore_errors: yes
+
 - name: Create a couchDB container
   command: docker run -d --name couchdb --network host -p 5984:5984 -v {{ couch_db_data_dir }}:/opt/couchdb/data -e "COUCHDB_USER={{database_user}}" -e "COUCHDB_PASSWORD={{database_password}}" couchdb:2.3.0
 
