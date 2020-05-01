@@ -1,0 +1,12 @@
+---
+volumes:
+  - device: /dev/vdb
+    mountpoint: /var/lib/docker
+  - device: /dev/vdc
+    mountpoint: /data
+
+couch_db_dir: couch_db
+
+#CouchDB
+database_user: admin
+database_password: 1111

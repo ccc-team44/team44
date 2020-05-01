@@ -5,8 +5,43 @@
 
   roles:
     - role: openstack-common
-    - role: openstack-images
     - role: openstack-volume
     - role: openstack-security-group
     - role: openstack-instance
-    - role: openstack-volume-snapshot
+
+
+- hosts: COMP90024
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Set proxy for internal IPs
+      lineinfile:
+        dest: /etc/environment
+        line: "{{ item }}"
+      with_items:
+        - 'http_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+        - 'https_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+        - 'ftp_proxy="http://wwwproxy.unimelb.edu.au:8000"'
+        - 'no_proxy=localhost,127.0.0.1,127.0.1.1,ubuntu'
+
+
+- hosts: COMP90024
+  gather_facts: true
+  become: yes
+  roles:
+    - role: couchdb-common
+    - role: docker
+    - role: couchdb-volumes
+
+- hosts: COMP90024
+  gather_facts: no
+  become: yes
+  roles:
+    - role: couchdb
+
+- hosts: COMP90024[0]
+  gather_facts: no
+  become: yes
+  roles:
+    - role: setup-cluster
+

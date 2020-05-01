@@ -1,0 +1,58 @@
+---
+- name: Create CouchDB dir
+  tags: 'couchdb'
+  become: yes
+  file:
+    path: "{{ couch_db_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+- name: Create CouchDB data dir
+  tags: 'couchdb'
+  become: yes
+  file:
+    path: "{{ couch_db_data_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+- name: chmod
+  command: sudo chmod 777 /var/run/docker.sock
+  ignore_errors: yes
+
+- name: all stop
+  shell: sudo docker ps -qa | xargs docker stop
+  ignore_errors: yes
+
+- name: all rm
+  shell: sudo docker ps -qa | xargs docker rm
+  ignore_errors: yes
+
+- name: Create a couchDB container
+  command: docker run -d --name couchdb --network host -p 5984:5984 -v {{ couch_db_data_dir }}:/opt/couchdb/data -e "COUCHDB_USER={{database_user}}" -e "COUCHDB_PASSWORD={{database_password}}" couchdb:2.3.0
+
+
+- name: modifies vm.args
+  command: "{{item}}"
+  with_items:
+    - docker exec couchdb bash -c "echo \"-setcookie cookie44\" >> /opt/couchdb/etc/vm.args"
+    - docker exec couchdb bash -c "echo \"-name couchdb@{{ansible_default_ipv4.address}}\" >> /opt/couchdb/etc/vm.args"
+
+- name: restart couchdb
+  command: docker restart couchdb
+
+- name: wait for restart
+  pause:
+    seconds: 15
+
+- name: config bind_address and UUID
+  command: "{{item}}"
+  with_items:
+    - curl -X PUT http://{{database_user}}:{{database_password}}@127.0.0.1:5984/_node/_local/_config/chttpd/bind_address -d '"0.0.0.0"'
+    - curl -X PUT http://{{database_user}}:{{database_password}}@127.0.0.1:5984/_node/_local/_config/httpd/bind_address -d '"0.0.0.0"'
+    - curl -X PUT http://{{database_user}}:{{database_password}}@127.0.0.1:5984/_node/_local/_config/couchdb/uuid -d '"{{ couchdb_cookie }}"'
+    - curl -X PUT http://{{database_user}}:{{database_password}}@127.0.0.1:5984/_node/_local/_config/couch_httpd_auth/secret -d '"{{ couchdb_cookie }}"'
+
