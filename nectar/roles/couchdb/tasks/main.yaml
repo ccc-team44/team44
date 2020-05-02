@@ -21,8 +21,14 @@
 
 - name: all stop
   become: yes
-  shell: docker rm -f $(docker ps -aq)
+  shell: docker ps -qa | xargs docker stop
   ignore_errors: yes
+
+- name: all rm
+  become: yes
+  shell: docker ps -qa | xargs docker rm
+  ignore_errors: yes
+
 
 
 - name: Configure compose
