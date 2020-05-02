@@ -4,17 +4,13 @@ availability_zone: melbourne-qh2-uom
 # Volume
 volumes:
   - vol_name: vol-1
-    vol_size: 10
+    vol_size: 60
   - vol_name: vol-2
-    vol_size: 10
+    vol_size: 60
   - vol_name: vol-3
-    vol_size: 10
+    vol_size: 60
   - vol_name: vol-4
-    vol_size: 10
-  - vol_name: vol-5
-    vol_size: 10
-  - vol_name: vol-6
-    vol_size: 10
+    vol_size: 60
 
 # Security group
 security_groups:
@@ -58,11 +54,13 @@ security_groups:
 # Instance
 instances:
   - name: server1
-    volumes: ['vol-1', 'vol-2']
+    volumes: ['vol-1']
   - name: server2
-    volumes: ['vol-3', 'vol-4']
+    volumes: ['vol-2']
   - name: server3
-    volumes: ['vol-5', 'vol-6']
+    volumes: ['vol-3']
+  - name: server4
+    volumes: ['vol-4']
 
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
 instance_key_name: id_xin

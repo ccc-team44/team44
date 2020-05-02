@@ -1,0 +1,14 @@
+version: "3"
+services:
+  couchdb:
+    image: "couchdb:2.3.1"
+    container_name: couchdb
+    restart: always
+    network_mode: host
+    ports:
+      - 5984:5984
+    volumes:
+      - {{ couch_db_data_dir }}:/opt/couchdb/data
+    environment:
+      COUCHDB_USER: {{ database_user }}
+      COUCHDB_PASSWORD: {{ database_password }}
