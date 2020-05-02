@@ -1,8 +1,8 @@
 ---
 - name: Setup proxy
   lineinfile:
-  dest: /etc/environment
-  line: "{{ item }}"
+    dest: /etc/environment
+    line: "{{ item }}"
   with_items:
     - 'http_proxy="http://wwwproxy.unimelb.edu.au:8000"'
     - 'https_proxy="http://wwwproxy.unimelb.edu.au:8000"'
