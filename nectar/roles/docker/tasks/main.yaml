@@ -77,3 +77,12 @@
     daemon_reload: yes
     state: restarted
     name: docker
+
+- name: wait for restart
+  pause:
+    seconds: 10
+
+- name: Log into docker
+  docker_login:
+    username: ccc44a2
+    password: bigcouch123

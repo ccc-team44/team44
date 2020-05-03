@@ -1,13 +1,14 @@
 ---
 - name: Create django directory
-  tags: 'django'
+  tags: 'crawler'
   become: yes
   file:
-    path: "{{ django_dir }}"
+    path: "{{ crawler_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     recurse: yes
     state: directory
+
 
 - name: Configure compose
   tags: 'django'
