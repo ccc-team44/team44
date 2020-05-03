@@ -1,0 +1,5 @@
+---
+crawler_dir: crawler
+database_user: admin
+database_password: 1111
+database_port: 5984
