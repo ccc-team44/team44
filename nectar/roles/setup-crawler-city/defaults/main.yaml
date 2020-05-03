@@ -1,5 +1,5 @@
 ---
-crawler_dir: crawler_city
+crawler_city_dir: crawler_city
 database_user: admin
 database_password: 1111
 database_port: 5984

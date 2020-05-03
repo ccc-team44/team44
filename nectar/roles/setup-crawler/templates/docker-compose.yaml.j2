@@ -6,6 +6,7 @@ services:
     restart: always
     network_mode: host
     environment:
+      HTTPS_PROXY="http://wwwproxy.unimelb.edu.au:8000"
       DATABASE_USER: {{ database_user }}
       DATABASE_PASSWORD: {{ database_password }}
       DATABASE_HOST: {{ groups['COMP90024'][0] }}
