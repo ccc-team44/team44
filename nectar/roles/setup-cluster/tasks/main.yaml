@@ -22,5 +22,11 @@
   with_items:  
     - tweets
     - aurin
+    - users
+    - melbourne
+    - adelaide
+    - brisbane
+    - perth
+    - sydney
 
   

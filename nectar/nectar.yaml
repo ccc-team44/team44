@@ -27,4 +27,11 @@
     - role: setup-cluster
     - role: setup-django-server
     - role: setup-react-app
+    - role: setup-crawler-city
+
+- hosts: COMP90024
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: setup-crawler
 
