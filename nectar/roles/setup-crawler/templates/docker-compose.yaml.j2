@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
   django_server:
-    image: ccc44a2/ccc-44-django-server:latest
+    image: ccc44a22nd/ccc-crawler:latest
     restart: always
-    ports:
-      - 8001:8001
     environment:
-      COUCH_DB_USER: {{ database_user }}
-      COUCH_DB_PASSWORD: {{ database_password }}
-      COUCH_DB_ADDRESS: {{ groups['COMP90024'][0] }}:5984
+      DATABASE_USER: {{ database_user }}
+      DATABASE_PASSWORD: {{ database_password }}
+      DATABASE_HOST: {{ groups['COMP90024'][0] }}
+      DATABASE_PORT: {{ database_host }}
+      node_index: {{ play_hosts.index(inventory_hostname) }}
