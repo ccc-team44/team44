@@ -1,0 +1,5 @@
+---
+old_tweets_crawler_dir: old_tweets_crawler_dir
+database_user: admin
+database_password: 1111
+database_port: 5984
