@@ -17,5 +17,10 @@
   become: yes
 
 
+- name: pull image
+  become: yes
+  shell: docker pull gcr.io/cloud-automl-tables-public/model_server
+
 - name: run prediction model server
-  shell: sudo docker run -v `pwd`{{ git_repo }}/tf_saved_model_tweets:/models/default/0000001 -p 13000:8080 -it gcr.io/cloud-automl-tables-public/model_server
+  become: yes
+  shell: docker run -v `pwd`{{ dir }}/tf_saved_model_tweets:/models/default/0000001 -p 8502:8080 -it gcr.io/cloud-automl-tables-public/model_server &
