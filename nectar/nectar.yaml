@@ -29,6 +29,7 @@
     - role: setup-react-app
     - role: setup-crawler-city
     - role: setup-old-tweets-crawler
+    - role: setup-ts-server
 
 - hosts: COMP90024
   gather_facts: yes

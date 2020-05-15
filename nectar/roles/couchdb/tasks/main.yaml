@@ -62,9 +62,9 @@
 
 - name: wait for restart
   pause:
-    seconds: 15
+    seconds: 30
 
-- name: config bind_address and UUID
+- name: 2.2.3. Preparing CouchDB nodes to be joined into a cluster
   command: "{{item}}"
   with_items:
     - curl -X PUT http://{{database_user}}:{{database_password}}@127.0.0.1:5984/_node/_local/_config/chttpd/bind_address -d '"0.0.0.0"'
