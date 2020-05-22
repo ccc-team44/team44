@@ -30,6 +30,7 @@
     - role: setup-old-tweets-crawler
     - role: setup-ts-server
     - role: setup-classification-model
+    - role: setup-analyser
 
 - hosts: COMP90024
   gather_facts: yes
