@@ -23,7 +23,7 @@
 
 - name: run prediction model server
   become: yes
-  shell: docker run -d -v ~/{{ dir }}/tf_saved_model_tweets:/models/default/0000001 -p 8502:8080 -it gcr.io/cloud-automl-tables-public/model_server
+  shell: docker run -d -v ~/classification_model/tf_saved_model_tweets:/models/default/0000001 -p 8502:8080 -it gcr.io/cloud-automl-tables-public/model_server
 
 - name: wait for server
   pause:
