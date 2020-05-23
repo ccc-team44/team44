@@ -29,6 +29,11 @@
   shell: docker ps -qa | xargs docker rm
   ignore_errors: yes
 
+- name: docker prune
+  become: yes
+  shell: docker system prune -af
+  ignore_errors: yes
+
 
 
 - name: Configure compose

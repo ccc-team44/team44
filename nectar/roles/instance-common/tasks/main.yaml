@@ -1,4 +1,28 @@
 ---
+- name: ext4 volume
+  filesystem:
+    fstype: ext4
+    dev: /dev/vdb
+
+- name: mkdir
+  file:
+    path: /mnt/data
+    state: directory
+
+- name: mount
+  mount:
+    path: /mnt/data
+    src: /dev/vdb
+    fstype: ext4
+    state: mounted
+
+- name: permission
+  file:
+    path: /mnt/data
+    mode: 0777
+    recurse: yes
+    state: directory
+
 - name: Gather facts of remote host
   setup:
     gather_subset: all
