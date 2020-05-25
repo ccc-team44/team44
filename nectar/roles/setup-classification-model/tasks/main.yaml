@@ -1,0 +1,30 @@
+---
+- name: Create ts server directory
+  tags: 'classification_model'
+  become: yes
+  file:
+    path: "{{ dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+- name: Clone the code repository.
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ dir }}"
+    accept_hostkey: yes
+  become: yes
+
+
+- name: pull image
+  become: yes
+  shell: docker pull gcr.io/cloud-automl-tables-public/model_server
+
+- name: run prediction model server
+  become: yes
+  shell: docker run -d -v ~/classification_model/tf_saved_model_tweets:/models/default/0000001 -p 8502:8080 -it gcr.io/cloud-automl-tables-public/model_server
+
+- name: wait for server
+  pause:
+    seconds: 30

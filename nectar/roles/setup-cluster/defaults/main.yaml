@@ -1,6 +1,6 @@
 ---
 couch_db_dir: couch_db
-couch_db_data_dir: /data/couch_db
+couch_db_data_dir: /mnt/data
 database_user: admin
 database_password: 1111
 couchdb_cookie: a192aeb9904e6590849337933b001159

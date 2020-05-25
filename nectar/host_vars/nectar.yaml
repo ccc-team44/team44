@@ -44,6 +44,18 @@ security_groups:
     port_range_min: 8001
     port_range_max: 8001
     remote_ip_prefix: 0.0.0.0/0
+  - name: ts_8002
+    description: "Backend ts express server security group"
+    protocol: tcp
+    port_range_min: 8002
+    port_range_max: 8002
+    remote_ip_prefix: 0.0.0.0/0
+  - name: tf
+    description: "tensorflow model tweet classification model server"
+    protocol: tcp
+    port_range_min: 8500
+    port_range_max: 8510
+    remote_ip_prefix: 0.0.0.0/0
   - name: swarm_2377
     description: "SWARM security group"
     protocol: tcp
@@ -64,5 +76,5 @@ instances:
 
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
 instance_key_name: id_xin
-instance_flavor: uom.mse.1c4g
+instance_flavor: uom.mse.2c9g
 

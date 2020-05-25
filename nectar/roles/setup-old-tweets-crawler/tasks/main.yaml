@@ -1,28 +1,31 @@
 ---
-- name: Create dir for crawler by city
-  tags: 'crawler-city'
+- name: Create dir for crawler
+  tags: 'old-tweet-crawler'
   become: yes
   file:
-    path: "{{ crawler_city_dir }}"
+    path: "{{ old_tweets_crawler_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     recurse: yes
     state: directory
 
+- debug:
+    msg: "{{ play_hosts.index(inventory_hostname) }}"
+
 - name: Configure compose
-  tags: 'crawler-city'
+  tags: 'old-tweet-crawler'
   become: yes
   template:
     src: docker-compose.yaml.j2
-    dest: "{{ crawler_city_dir }}/docker-compose.yaml"
+    dest: "{{ old_tweets_crawler_dir }}/docker-compose.yaml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
 - name: Run docker compose
-  tags: 'crawler-city'
+  tags: 'old-tweet-crawler'
   become: yes
   docker_compose:
-    project_src: "{{ crawler_city_dir }}"
+    project_src: "{{ old_tweets_crawler_dir }}"
     pull: yes
     state: present
     remove_orphans: yes

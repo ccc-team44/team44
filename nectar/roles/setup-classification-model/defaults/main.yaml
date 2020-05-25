@@ -1,0 +1,3 @@
+---
+dir: /mnt/data/classification_model
+git_repo: https://github.com/ccc-team44/ccc-tweet-classification-model.git

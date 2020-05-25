@@ -1,13 +1,13 @@
 ---
-- name: add node to master (step1-begin)
+- name: Add COMP90024[1::] into COMP90024[0]
   command: "curl -X POST -H \"Content-Type: application/json\" http://{{database_user}}:{{database_password}}@{{ansible_default_ipv4.address}}:5984/_cluster_setup -d '{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\", \"username\": \"{{database_user}}\", \"password\": \"{{database_password}}\", \"port\": 5984, \"node_count\": \"2\", \"remote_node\": \"{{item}}\", \"remote_current_user\": \"{{database_user}}\", \"remote_current_password\": \"{{database_password}}\" }'"
   with_items: "{{groups['COMP90024'][1::]}}"
 
-- name: add node to master (step2-in process)
+- name: Add COMP90024[1::] into COMP90024[0]
   command: "curl -X POST -H \"Content-Type: application/json\" http://{{database_user}}:{{database_password}}@{{ansible_default_ipv4.address}}:5984/_cluster_setup -d '{\"action\": \"add_node\", \"host\":\"{{item}}\", \"port\": 5984, \"username\": \"{{database_user}}\", \"password\": \"{{database_password}}\"}'"
   with_items: "{{groups['COMP90024'][1::]}}"
 
-- name: add node to master (step3-finish)
+- name: Add COMP90024[1::] into COMP90024[0]
   command: "curl -X POST -H \"Content-Type: application/json\" http://{{database_user}}:{{database_password}}@{{ansible_default_ipv4.address}}:5984/_cluster_setup -d '{\"action\": \"finish_cluster\"}'"
   with_items: "{{groups['COMP90024'][1::]}}"
 
@@ -21,6 +21,7 @@
   command: curl -X PUT "http://{{ansible_default_ipv4.address}}:5984/{{item}}?n=3&q=8" --user "{{database_user}}:{{database_password}}"
   with_items:  
     - tweets
+    - classified_tweets
     - aurin
     - users
     - melbourne
@@ -28,5 +29,13 @@
     - brisbane
     - perth
     - sydney
+    - newsouthwales_tweets
+    - victoria_tweets
+    - queensland_tweets
+    - western_australia_tweets
+    - southaustralia_tweets
+    - australiancapitalterritory_tweets
+    - tasmania_tweets
+    - northernterritory_tweets
 
   
