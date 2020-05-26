@@ -1,4 +1,4 @@
 ---
 - name: run analyser
   become: yes
-  shell: docker run -d -it ccc44a2ts/taccc:latest
+  shell: docker run -d -it --env COUCH_DB_USER=admin --env db_password=1111 --env COUCH_DB_ADDRESS={{groups['COMP90024'][0]}}:5984 ccc44a2ts/taccc:latest
